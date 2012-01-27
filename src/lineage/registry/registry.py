@@ -3,7 +3,7 @@ from plone.app.registry import Registry
 
 _MARKER = object()
 
-class ProxyRegistry(Registry):
+class LayeredProxyRegistry(Registry):
     """Registry which proxies values from its parent registry in the local 
     component stack. On set it sets values in this registry.   
     """
