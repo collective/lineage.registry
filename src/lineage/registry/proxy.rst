@@ -34,7 +34,7 @@ Check registry creation
     >>> csm
     <PersistentComponents child>
         
-XXX: Here a test is cheating: We need to check if ```getUtility(IRegistry)```
+XXX: Here test is cheating: We need to check if ```getUtility(IRegistry)```
 returns the childs sitemanager registry. Well, this needs publishers traversal
 as far as i know. No idea how to do this in a test. To be done.
 
@@ -77,6 +77,9 @@ Prepare data::
     
 Read from portal registry values from child registry::
 
+    >>> child_registry.records
+    <lineage.registry.proxy._LineageRecords object at 0x...>
+    
     >>> child_registry.records['lineage.registry.tests.cms'].value
     u'Plone'
     
@@ -134,4 +137,13 @@ Remove, contains, keys::
     >>> child_registry.records['lineage.registry.tests.cms'].value
     u'Plone + Lineage'
 
-    
+XXX Todo: minKey, maxKey, _getField
+
+Access via registry
+-------------------
+
+::
+
+    >>> child_registry['lineage.registry.tests.cms']
+    u'Plone + Lineage'
+

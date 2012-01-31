@@ -28,6 +28,21 @@ class LineageRegistry(Registry):
                 return registry
         return None
     
+    def __getitem__(self, name):
+        return self.records[name].value
+    
+    def get(self, name, default=None):
+        record = self.records.get(name, _MARKER)
+        if record is _MARKER:
+            return default
+        return record.value
+    
+    def __setitem__(self, name, value):
+        self.records[name].value = value
+    
+    def __contains__(self, name):
+        return name in self.records
+    
     @property
     def records(self):
         if not isinstance(self._records, _LineageRecords):

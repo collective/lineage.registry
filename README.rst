@@ -1,4 +1,4 @@
-This package provides a plone.app.registyr for Lineage subsites. It adds a
+This package provides a plone.app.registry for Lineage subsites. It adds a
 local component with a proxy registry.
 
 Installation
