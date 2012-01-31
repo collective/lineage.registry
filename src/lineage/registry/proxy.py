@@ -2,13 +2,17 @@ from zope.component import (
     getSiteManager,
     queryUtility,
 )
+from persistent import Persistent
 from plone.registry.interfaces import (
     IRegistry,
     IPersistentField,
     IFieldRef,
 )
 from plone.registry.registry import _Records
-from plone.app.registry import Registry
+from plone.app.registry import (
+    Registry,
+    Record,
+)
 
 _MARKER = object()
 
@@ -38,7 +42,11 @@ class LineageRegistry(Registry):
         return record.value
     
     def __setitem__(self, name, value):
-        self.records[name].value = value
+        if name in self.records._values:
+            self.records[name].value = value
+            return
+        record = Record(self.records[name].field, value)
+        self.records[name] = record
     
     def __contains__(self, name):
         return name in self.records
@@ -49,7 +57,7 @@ class LineageRegistry(Registry):
             self._records = _LineageRecords(self)
         return self._records
         
-class _LineageRecords(_Records): 
+class _LineageRecords(_Records, Persistent): 
     """The records stored in the registry. This implements dict-like access
     to records, where as the Registry object implements dict-like read-only
     access to values.
