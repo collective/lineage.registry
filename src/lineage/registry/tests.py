@@ -9,7 +9,7 @@ from plone.testing import (
 from .testing import LINEAGEREGISTRY_INTEGRATION_TESTING
 
 TESTFILES = [
-    ('registry.rst', LINEAGEREGISTRY_INTEGRATION_TESTING),
+    ('proxy.rst', LINEAGEREGISTRY_INTEGRATION_TESTING),
 ]
 
 optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS

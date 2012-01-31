@@ -1,20 +1,29 @@
-from zope.component import adapter
-from zope.component import getSiteManager
-from collective.lineage.interfaces import IChildSiteCreatedEvent
-from collective.lineage.interfaces import IChildSiteRemovedEvent
-from .registry import LayeredProxyRegistry
+from zope.component import (
+    adapter,
+    getSiteManager,
+)
+from plone.registry.interfaces import IRegistry
+from collective.lineage.interfaces import (
+    IChildSiteCreatedEvent,
+    IChildSiteRemovedEvent,
+)
+from .proxy import (
+    REGISTRY_NAME,
+    LineageRegistry,
+)
 
 @adapter(IChildSiteCreatedEvent)
 def enableChildRegistry(event):
-    sm = getSiteManager(context=event.object)
-    # create LayeredProxyRegistry (as annotation?) of event.object if not exist
-    # sm.registerUtility(self, component=None, provided=None, name=u'', info=u'', 
-    #                    event=True, factory=None):
+    child = event.object
+    sm = getSiteManager(context=child)    
+    if REGISTRY_NAME not in child.objectIds():
+        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME).__of__(child)
+    sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry) 
     
 @adapter(IChildSiteRemovedEvent)
 def disableChildRegistry(event):
-    sm = getSiteManager(context=event.object)
-    # sm.unregisterUtility(self, component=None, provided=None, name=u'',
-    #                      factory=None):    
-    # we keep the annotation
-
+    if REGISTRY_NAME not in child.objectIds():
+        return
+    # we keep the registry here (intentionally)
+    sm = getSiteManager(context=child)
+    sm.unregisterUtility(component=child[REGISTRY_NAME], provided=IRegistry)
