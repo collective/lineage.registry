@@ -15,12 +15,6 @@ already exists in child-registry value is set.
 On value delete it deletes only existing values in the child-registry and does 
 not touch the parent registry.
 
-
-Installation
-============
-
-* add the egg to your buildouts ``eggs``-section.
-
 Restrictions
 ============
 
@@ -29,7 +23,7 @@ Theres no editing UI for now.
 Installation
 ============
 
-Just depend in your buildout on the egg ``lineage.themeselection``. ZCML is
+Just depend in your buildout on the egg ``lineage.registry``. ZCML is
 loaded automagically with z3c.autoinclude.
 
 Install it as an addon in Plone control-panel or portal_setup.
@@ -40,10 +34,10 @@ Source Code and Contributions
 =============================
 
 If you want to help with the development (improvement, update, bug-fixing, ...)
-of ``lineage.themeselection`` this is a great idea!
+of ``lineage.registry`` this is a great idea!
 
 The code is located in the
-`github collective <https://github.com/collective/lineage.themeselection>`_.
+`github collective <https://github.com/collective/lineage.registry>`_.
 
 You can clone it or `get access to the github-collective
 <http://collective.github.com/>`_ and work directly on the project.
