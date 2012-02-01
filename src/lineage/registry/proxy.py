@@ -8,11 +8,9 @@ from plone.registry.interfaces import (
     IPersistentField,
     IFieldRef,
 )
+from plone.registry import Record
 from plone.registry.registry import _Records
-from plone.app.registry import (
-    Registry,
-    Record,
-)
+from plone.app.registry import Registry
 
 _MARKER = object()
 
