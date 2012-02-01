@@ -4,6 +4,8 @@ import sys, os
 version = '1.0'
 shortdesc ="Lineage AddOn: plone.app.registry for subsites"
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
+longdesc += open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')).read()
+longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
 
 setup(name='lineage.registry',
       version=version,
