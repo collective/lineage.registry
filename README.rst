@@ -9,7 +9,7 @@ Installation
 Restrictions
 ============
 
-Theres no UI for now to edit the values.
+Theres no editing UI for now. 
 
 Source Code
 ===========
