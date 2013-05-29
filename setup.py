@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
-version = '1.0.1'
-shortdesc ="Lineage AddOn: plone.app.registry for subsites"
+version = '1.1dev'
+shortdesc = u"Lineage AddOn: plone.app.registry for subsites"
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 longdesc += open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')).read()
 longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
@@ -16,8 +16,8 @@ setup(name='lineage.registry',
             'Environment :: Web Environment',
             'License :: OSI Approved :: GNU General Public License (GPL)',
             'Operating System :: OS Independent',
-            'Programming Language :: Python', 
-            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',        
+            'Programming Language :: Python',
+            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
       ],
       keywords='',
       author='BlueDynamics Alliance',
@@ -25,8 +25,8 @@ setup(name='lineage.registry',
       url=u'https://github.com/collective/lineage.registry',
       license='GNU General Public Licence',
       packages=find_packages('src'),
-      package_dir = {'': 'src'},
-      namespace_packages=['lineage',],
+      package_dir={'': 'src'},
+      namespace_packages=['lineage'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
@@ -37,7 +37,7 @@ setup(name='lineage.registry',
           'test': [
               'collective.lineage[test]',
           ],
-      },      
+      },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone

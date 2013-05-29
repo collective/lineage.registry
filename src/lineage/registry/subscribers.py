@@ -12,16 +12,19 @@ from .proxy import (
     LineageRegistry,
 )
 
+
 @adapter(IChildSiteCreatedEvent)
 def enableChildRegistry(event):
     child = event.object
-    sm = getSiteManager(context=child)    
+    sm = getSiteManager(context=child)
     if REGISTRY_NAME not in child.objectIds():
         child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME).__of__(child)
-    sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry) 
-    
+    sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry)
+
+
 @adapter(IChildSiteRemovedEvent)
 def disableChildRegistry(event):
+    child = event.object
     if REGISTRY_NAME not in child.objectIds():
         return
     # we keep the registry here (intentionally)

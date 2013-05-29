@@ -2,6 +2,12 @@
 History
 =======
 
+1.1dev (unreleased)
+-------------------
+
+- Fix bug when disabling a lineage site.
+  [thet]
+
 1.0.1
 -----
 
