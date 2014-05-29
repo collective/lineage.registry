@@ -18,7 +18,7 @@ def enableChildRegistry(event):
     child = event.object
     sm = getSiteManager(context=child)
     if REGISTRY_NAME not in child.objectIds():
-        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME).__of__(child)
+        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME, parent=child)
     sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry)
 
 

@@ -52,20 +52,22 @@ An now we can go on as if we are after publishers traversal::
     >>> child_registry = getUtility(IRegistry)
     >>> child_registry
     <LineageRegistry at /plone/child/lineage_registry>
-
+   
 
 Check parent
 ------------
 
 Searching parent registry::
 
-    >>> child_registry._parent_registry
-    <Registry at /plone/portal_registry used for /plone/child/lineage_registry>
+    >>> from lineage.registry.proxy import get_parent_registry
+    >>> get_parent_registry(child_registry)
+    <Registry at /plone/portal_registry>
 
     >>> psm = getSiteManager(portal)
     >>> portal_registry = psm.getUtility(IRegistry)
-    >>> child_registry._parent_registry.aq_base is portal_registry.aq_base
+    >>> get_parent_registry(child_registry).aq_base is portal_registry.aq_base
     True
+ 
 
 Records Read/Write
 ------------------
@@ -181,6 +183,7 @@ Setup childchild site::
     >>> childchild_registry = getUtility(IRegistry)
     >>> childchild_registry
     <LineageRegistry at /plone/child/childchild/lineage_registry>
+    >>> childchild_registry.title = "childchild_registry"
 
 
 Read child registry values from childchild registry::
@@ -236,10 +239,8 @@ Proxy values from two layers above::
 
     >>> del child_registry.records['lineage.registry.tests.cms']
 
-#    >>> 'lineage.registry.tests.cms' in child_registry.records.keys()
-#    True
-
-::
+    >>> 'lineage.registry.tests.cms' in child_registry.records.keys()
+    True
 
     >>> portal_registry.records['lineage.registry.tests.cms'].value
     u'Plone'
@@ -249,3 +250,18 @@ Proxy values from two layers above::
 
     >>> childchild_registry.records['lineage.registry.tests.cms'].value
     u'Plone'
+
+
+Proxy for a very new key in the portal_registry::
+
+    >>> portal_registry.records['testvalue'] = \
+    ...     Record(field.TextLine(title=u"Portal value"), u"Only in here")
+
+    >>> portal_registry.records['testvalue'].value
+    u'Only in here'
+
+    >>> child_registry.records['testvalue'].value
+    u'Only in here'
+
+    >>> childchild_registry.records['testvalue'].value
+    u'Only in here'
