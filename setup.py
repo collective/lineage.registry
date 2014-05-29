@@ -35,7 +35,8 @@ setup(name='lineage.registry',
       ],
       extras_require={
           'test': [
-              'collective.lineage[test]',
+              'collective.lineage [test]',
+              'interlude',
           ],
       },
       entry_points="""
