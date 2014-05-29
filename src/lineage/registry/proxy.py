@@ -1,13 +1,11 @@
+from Acquisition import aq_parent
 from persistent import Persistent
 from plone.app.registry import Registry
-from plone.registry import Record
 from plone.registry import FieldRef
-from plone.registry.interfaces import IPersistentField
+from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from plone.registry.registry import _Records
 from zope.component import getSiteManager
-from zope.component import queryUtility
-from Acquisition import aq_parent
 
 _MARKER = object()
 
