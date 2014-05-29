@@ -54,6 +54,7 @@ class LineageRegistry(Registry):
 
 
 class _LineageRecords(_Records, Persistent):
+
     """The records stored in the registry. This implements dict-like access
     to records, where as the Registry object implements dict-like read-only
     access to values.
@@ -87,8 +88,8 @@ class _LineageRecords(_Records, Persistent):
                 yield name
 
     def has_key(self, name):
-        return self._values.has_key(name)\
-            or self._parents._values.has_key(name)
+        return name in self._values\
+            or name in self._parents._values
 
     def __contains__(self, name):
         return self._values.__contains__(name)\

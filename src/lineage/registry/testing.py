@@ -5,13 +5,14 @@ from plone.app.testing import (
 )
 from collective.lineage.testing import LINEAGE_FIXTURE
 
+
 class LineageRegistry(PloneSandboxLayer):
 
     defaultBases = (LINEAGE_FIXTURE, )
 
     def setUpZope(self, app, configurationContext):
         import lineage.registry
-        xmlconfig.file('configure.zcml', lineage.registry, 
+        xmlconfig.file('configure.zcml', lineage.registry,
                        context=configurationContext)
 
     def setUpPloneSite(self, portal):
@@ -19,5 +20,5 @@ class LineageRegistry(PloneSandboxLayer):
 
 LINEAGEREGISTRY_FIXTURE = LineageRegistry()
 LINEAGEREGISTRY_INTEGRATION_TESTING = \
-    IntegrationTesting(bases=(LINEAGEREGISTRY_FIXTURE, ), 
+    IntegrationTesting(bases=(LINEAGEREGISTRY_FIXTURE, ),
                        name="lineage.registry:Integration")
