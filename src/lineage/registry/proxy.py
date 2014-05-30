@@ -13,16 +13,18 @@ REGISTRY_NAME = 'lineage_registry'
 
 
 def get_parent_registry(base_registry):
-    # first aq_parent is container, where base_registry is contained,
-    # second aq_parent is a level above the local site.
-    parent = aq_parent(aq_parent(base_registry))
+    # aq_parent returns the container, where the base_registry is contained
+    parent = aq_parent(base_registry)
 
     # get the parent's site manager
+    # If parent is None for pre lineage.registry 1.1 sites, return the current
+    # site.
     sm = getSiteManager(context=parent)
 
-    registry = sm.queryUtility(IRegistry)
-    if registry is not None:
-        return registry
+    for base in sm._getBases():
+        registry = base.queryUtility(IRegistry)
+        if registry is not None:
+            return registry
     return None
 
 
