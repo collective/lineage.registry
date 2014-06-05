@@ -128,7 +128,7 @@ class _LineageRecords(_Records, Persistent):
 
     def has_key(self, name):
         return name in self._values\
-            or name in self._parent_records._values
+            or name in self._parent_records
 
     def __contains__(self, name):
         return self._values.__contains__(name)\
