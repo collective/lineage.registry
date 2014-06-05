@@ -294,13 +294,14 @@ And the sub sub registry::
     u'test value'
 
 
-Test containment
-----------------
+Test more of the _LineageRecords API
+------------------------------------
 
 ::
 
     >>> interact(locals())
 
+Containment::
 
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in portal_registry
     True
@@ -311,6 +312,7 @@ Test containment
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in childchild_registry
     True
 
+Has Key::
 
     >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
     True
@@ -319,5 +321,16 @@ Test containment
     True
 
     >>> childchild_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+    True
+
+Iter::
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in [it for it in portal_registry.records]
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in [it for it in child_registry.records]
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in [it for it in childchild_registry.records]
     True
 
