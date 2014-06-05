@@ -293,3 +293,31 @@ And the sub sub registry::
     >>> subsub_proxy.test_attribute
     u'test value'
 
+
+Test containment
+----------------
+
+::
+
+    >>> interact(locals())
+
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in portal_registry
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in child_registry
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in childchild_registry
+    True
+
+
+    >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+    True
+
+    >>> child_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+    True
+
+    >>> childchild_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+    True
+
