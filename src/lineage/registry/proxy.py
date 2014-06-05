@@ -122,7 +122,7 @@ class _LineageRecords(_Records, Persistent):
     def __iter__(self):
         for name in self._values.__iter__():
             yield name
-        for name in self._parent_records._values.__iter__():
+        for name in self._parent_records.__iter__():
             if name not in self._values:
                 yield name
 
