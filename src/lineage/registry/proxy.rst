@@ -299,7 +299,8 @@ Test more of the _LineageRecords API
 
 ::
 
-    >>> interact(locals())
+#    >>> interact(locals())
+
 
 Containment::
 
@@ -312,6 +313,7 @@ Containment::
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in childchild_registry
     True
 
+
 Has Key::
 
     >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
@@ -322,6 +324,7 @@ Has Key::
 
     >>> childchild_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
     True
+
 
 Iter::
 
@@ -334,6 +337,7 @@ Iter::
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in [it for it in childchild_registry.records]
     True
 
+
 Keys::
 
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in portal_registry.records.keys()
@@ -344,4 +348,46 @@ Keys::
 
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in childchild_registry.records.keys()
     True
+
+
+minKey::
+
+    >>> portal_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    'lineage.registry.tests.ITestSchema.test_attribute' 
+
+TODO: fixme
+WTF?::
+
+    >>> child_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    Traceback (most recent call last):
+    ...
+    ValueError: empty tree 
+
+    >>> childchild_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    Traceback (most recent call last):
+    ...
+    ValueError: empty tree 
+
+
+maxKey::
+
+    >>> portal_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    'lineage.registry.tests.ITestSchema.test_attribute' 
+
+TODO: fixme
+WTF?::
+
+    >>> child_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    Traceback (most recent call last):
+    ...
+    ValueError: empty tree 
+
+    >>> childchild_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
+    Traceback (most recent call last):
+    ...
+    ValueError: empty tree 
+
+
+
+
 
