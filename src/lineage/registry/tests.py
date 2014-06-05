@@ -1,12 +1,14 @@
-import unittest
+from .testing import LINEAGEREGISTRY_INTEGRATION_TESTING
+from interlude import interact
+from plone.testing import layered
+from plone.testing import z2
+from zope import schema
+from zope.interface import Interface
+
 import doctest
 import pprint
-from interlude import interact
-from plone.testing import (
-    layered,
-    z2,
-)
-from .testing import LINEAGEREGISTRY_INTEGRATION_TESTING
+import unittest
+
 
 TESTFILES = [
     ('proxy.rst', LINEAGEREGISTRY_INTEGRATION_TESTING),
@@ -14,6 +16,12 @@ TESTFILES = [
 
 optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
 optionflags |= doctest.REPORT_ONLY_FIRST_FAILURE
+
+
+class ITestSchema(Interface):
+    """Test schema to test the registry.forInterface call.
+    """
+    test_attribute = schema.TextLine(default=u"test value")
 
 
 def test_suite():

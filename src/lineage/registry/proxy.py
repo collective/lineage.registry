@@ -39,33 +39,51 @@ class LineageRegistry(Registry):
             # _LineageRecords object is set, so that it's __parent__ attribute
             # is also set to the acquisition-wrapped registry.
             self = self.__of__(parent)
+        else:
+            raise AssertionError(
+                "parent must not be None, otherwise the Acquisition context "
+                "of LineageRegistry cannot be set")
+
         super(LineageRegistry, self).__init__(id, title)
         # pass the acquisition-wrapped LineageRegistry instance to
         # _LineageRecords
         self._records = _LineageRecords(self)
 
     def __getitem__(self, name):
-        return self.records[name].value
+        records = self._get_and_fix_records()
+        return records[name].value
 
     def get(self, name, default=None):
-        record = self.records.get(name, _MARKER)
+        records = self._get_and_fix_records()
+        record = records.get(name, _MARKER)
         if record is _MARKER:
             return default
         return record.value
 
     def __setitem__(self, name, value):
-        if name in self.records._values:
-            self.records[name].value = value
+        records = self._get_and_fix_records()
+        if name in records._values:
+            records[name].value = value
             return
-        record = Record(self.records[name].field, value)
-        self.records[name] = record
+        record = Record(records[name].field, value)
+        records[name] = record
 
     def __contains__(self, name):
-        return name in self.records
+        records = self._get_and_fix_records()
+        return name in records
+
+    def _get_and_fix_records(self):
+        recs = self._records
+        if not hasattr(recs.__parent__, '__parent__'):
+            if not hasattr(self, '__parent__'):
+                raise AttributeError(
+                    "We lost the Acquisition context. This shouldn't happen.")
+            recs.__parent__ = self
+        return recs
 
     @property
     def records(self):
-        return self._records
+        return self._get_and_fix_records()
 
 
 class _LineageRecords(_Records, Persistent):
@@ -76,7 +94,14 @@ class _LineageRecords(_Records, Persistent):
 
     @property
     def _parent_records(self):
-        return get_parent_registry(self.__parent__).records
+        registry = get_parent_registry(self.__parent__)
+        if hasattr(registry, '_get_and_fix_records'):
+            # LineageRegistry
+            records = registry._get_and_fix_records()
+        else:
+            # Normal Registry
+            records = registry.records
+        return records
 
     def __setitem__(self, name, record):
         parval = self._parent_records._values

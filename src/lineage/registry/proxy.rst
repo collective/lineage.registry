@@ -52,7 +52,7 @@ An now we can go on as if we are after publishers traversal::
     >>> child_registry = getUtility(IRegistry)
     >>> child_registry
     <LineageRegistry at /plone/child/lineage_registry>
-   
+
 
 Check parent
 ------------
@@ -67,7 +67,7 @@ Searching parent registry::
     >>> portal_registry = psm.getUtility(IRegistry)
     >>> get_parent_registry(child_registry).aq_base is portal_registry.aq_base
     True
- 
+
 
 Records Read/Write
 ------------------
@@ -265,3 +265,31 @@ Proxy for a very new key in the portal_registry::
 
     >>> childchild_registry.records['testvalue'].value
     u'Only in here'
+
+
+Accessing via forInterface
+--------------------------
+
+Registering the test interface::
+
+    >>> from lineage.registry.tests import ITestSchema
+    >>> portal_registry.registerInterface(ITestSchema)
+
+Accessing the test interface::
+
+    >>> proxy = portal_registry.forInterface(ITestSchema)
+    >>> proxy.test_attribute
+    u'test value'
+
+This should also work for the sub registry::
+
+    >>> sub_proxy = child_registry.forInterface(ITestSchema)
+    >>> sub_proxy.test_attribute
+    u'test value'
+
+And the sub sub registry::
+
+    >>> subsub_proxy = childchild_registry.forInterface(ITestSchema)
+    >>> subsub_proxy.test_attribute
+    u'test value'
+
