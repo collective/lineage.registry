@@ -132,7 +132,7 @@ class _LineageRecords(_Records, Persistent):
 
     def __contains__(self, name):
         return self._values.__contains__(name)\
-            or self._parent_records._values.__contains__(name)
+            or self._parent_records.__contains__(name)
 
     def keys(self, min=None, max=None):
         data = set(self._values.keys(min, max))
