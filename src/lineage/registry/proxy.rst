@@ -334,3 +334,14 @@ Iter::
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in [it for it in childchild_registry.records]
     True
 
+Keys::
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in portal_registry.records.keys()
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in child_registry.records.keys()
+    True
+
+    >>> 'lineage.registry.tests.ITestSchema.test_attribute' in childchild_registry.records.keys()
+    True
+

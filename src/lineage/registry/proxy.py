@@ -136,16 +136,16 @@ class _LineageRecords(_Records, Persistent):
 
     def keys(self, min=None, max=None):
         data = set(self._values.keys(min, max))
-        data.update(self._parent_records._values.keys(min, max))
+        data.update(self._parent_records.keys(min, max))
         return list(data)
 
     def maxKey(self, key=None):
-        max([self._values.maxKey(key) +
-             self._parent_records._values.maxKey(key)])
+        return max([self._values.maxKey(key) +
+                    self._parent_records.maxKey(key)])
 
     def minKey(self, key=None):
-        min([self._values.minKey(key) +
-             self._parent_records._values.minKey(key)])
+        return min([self._values.minKey(key) +
+                    self._parent_records.minKey(key)])
 
     def _getField(self, name):
         field = self._fields.get(name, _MARKER)
