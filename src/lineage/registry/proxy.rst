@@ -299,7 +299,7 @@ Test more of the _LineageRecords API
 
 ::
 
-#    >>> interact(locals())
+    >>> interact(locals())
 
 
 Containment::
@@ -388,6 +388,43 @@ WTF?::
     ValueError: empty tree 
 
 
+Setting over registry boundaries
+================================
+
+::
+
+    >>> portal_registry.records['testkey'] = Record(
+    ...     field.TextLine(title=u"CMS of choice"), u"Testval1")
+    
+    >>> child_registry.records['testkey'] = Record(
+    ...     field.TextLine(title=u"CMS of choice"), u"Testval1")
+
+    >>> childchild_registry.records['testkey'] = Record(
+    ...     field.TextLine(title=u"CMS of choice"), u"Testval1") 
+
+
+These settings should be available for all registries in the chain::
+    
+    >>> portal_registry.records['testkey'].value
+    u'Testval1'
+
+    >>> child_registry.records['testkey'].value
+    u'Testval1'
+
+    >>> childchild_registry.records['testkey'].value
+    u'Testval1'
+
+
+But actually only be set on portal_registry, since we set all the same values::
+
+    >>> portal_registry.records._values.get('testkey', False)
+    u'Testval1'
+
+    >>> child_registry.records._values.get('testkey', False)
+    False
+
+    >>> childchild_registry.records._values.get('testkey', False)
+    False
 
 
 
