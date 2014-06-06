@@ -2,7 +2,7 @@
 History
 =======
 
-1.2 (unreleased)
+1.2 (2014-06-06)
 ----------------
 
 - Fix lineage.registry for sub-subsites and other arbitrary nested sites.
