@@ -297,11 +297,6 @@ And the sub sub registry::
 Test more of the _LineageRecords API
 ------------------------------------
 
-::
-
-    >>> interact(locals())
-
-
 Containment::
 
     >>> 'lineage.registry.tests.ITestSchema.test_attribute' in portal_registry
@@ -394,13 +389,13 @@ Setting over registry boundaries
 ::
 
     >>> portal_registry.records['testkey'] = Record(
-    ...     field.TextLine(title=u"CMS of choice"), u"Testval1")
+    ...     field.TextLine(), u"Testval1")
     
     >>> child_registry.records['testkey'] = Record(
-    ...     field.TextLine(title=u"CMS of choice"), u"Testval1")
+    ...     field.TextLine(), u"Testval1")
 
     >>> childchild_registry.records['testkey'] = Record(
-    ...     field.TextLine(title=u"CMS of choice"), u"Testval1") 
+    ...     field.TextLine(), u"Testval1") 
 
 
 These settings should be available for all registries in the chain::
@@ -415,7 +410,8 @@ These settings should be available for all registries in the chain::
     u'Testval1'
 
 
-But actually only be set on portal_registry, since we set all the same values::
+... but actually only be set on portal_registry, since we have set all the same
+values::
 
     >>> portal_registry.records._values.get('testkey', False)
     u'Testval1'
@@ -427,4 +423,41 @@ But actually only be set on portal_registry, since we set all the same values::
     False
 
 
+Now we're setting something different::
 
+    >>> child_registry.records['testkey'] = Record(
+    ...     field.TextLine(), u"Testval2")
+
+    >>> childchild_registry.records['testkey'] = Record(
+    ...     field.TextLine(), u"Testval3") 
+
+
+These settings should be stored in it the registries, where they were set::
+    
+    >>> portal_registry.records['testkey'].value
+    u'Testval1'
+
+    >>> child_registry.records['testkey'].value
+    u'Testval2'
+
+    >>> childchild_registry.records['testkey'].value
+    u'Testval3'
+
+
+Now for sure::
+
+    >>> portal_registry.records._values.get('testkey', False)
+    u'Testval1'
+
+    >>> child_registry.records._values.get('testkey', False)
+    u'Testval2'
+
+    >>> childchild_registry.records._values.get('testkey', False)
+    u'Testval3'
+
+
+Done.
+
+::
+
+#    >>> interact(locals())
