@@ -104,8 +104,8 @@ class _LineageRecords(_Records, Persistent):
         return records
 
     def __setitem__(self, name, record):
-        parval = self._parent_records._values
-        if parval.get(name, _MARKER) == record.value:
+        parent_rec = self._parent_records.get(name, _MARKER)
+        if parent_rec is not _MARKER and parent_rec.value == record.value:
             return
         super(_LineageRecords, self).__setitem__(name, record)
 
