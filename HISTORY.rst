@@ -19,7 +19,11 @@ History
 1.0.1
 -----
 
-- wrong information in README.rst corrected. 
+- Added enableRegistry and disableRegistry in order to make event subscribers
+simpler. Now you can enable a local Registry in a simple folder and not only on collective.lineage.content.ChildFolder. See: tests.TestLineageRegistry
+[gborelli]
+
+- wrong information in README.rst corrected.
   [jensens]
 
 

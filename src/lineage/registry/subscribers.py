@@ -1,32 +1,19 @@
-from zope.component import (
-    adapter,
-    getSiteManager,
-)
-from plone.registry.interfaces import IRegistry
+from zope.component import adapter
+
 from collective.lineage.interfaces import (
     IChildSiteCreatedEvent,
     IChildSiteRemovedEvent,
 )
-from .proxy import (
-    REGISTRY_NAME,
-    LineageRegistry,
-)
+
+from .utils import enableRegistry
+from .utils import disableRegistry
 
 
 @adapter(IChildSiteCreatedEvent)
 def enableChildRegistry(event):
-    child = event.object
-    sm = getSiteManager(context=child)
-    if REGISTRY_NAME not in child.objectIds():
-        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME, parent=child)
-    sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry)
+    enableRegistry(event.object)
 
 
 @adapter(IChildSiteRemovedEvent)
 def disableChildRegistry(event):
-    child = event.object
-    if REGISTRY_NAME not in child.objectIds():
-        return
-    # we keep the registry here (intentionally)
-    sm = getSiteManager(context=child)
-    sm.unregisterUtility(component=child[REGISTRY_NAME], provided=IRegistry)
+    disableRegistry(event.object)
