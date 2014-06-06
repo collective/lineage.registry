@@ -1,8 +1,21 @@
+from .proxy import LineageRegistry
+from .proxy import REGISTRY_NAME
 from .testing import LINEAGEREGISTRY_INTEGRATION_TESTING
+from .utils import disableRegistry
+from .utils import enableRegistry
+from Products.CMFCore.utils import getToolByName
+from five.localsitemanager import make_objectmanager_site
 from interlude import interact
+from plone.app.registry.registry import Registry
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
+from plone.registry.interfaces import IRegistry
 from plone.testing import layered
 from plone.testing import z2
 from zope import schema
+from zope.component import getUtility
+from zope.component.hooks import setSite
+from zope.component.interfaces import ISite
 from zope.interface import Interface
 
 import doctest
@@ -17,26 +30,11 @@ TESTFILES = [
 optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
 optionflags |= doctest.REPORT_ONLY_FIRST_FAILURE
 
-from zope.component import getUtility
-from zope.component.hooks import setSite
-from zope.component.interfaces import ISite
 
-from five.localsitemanager import make_objectmanager_site
-
-from Products.CMFCore.utils import getToolByName
-
-from plone.registry.interfaces import IRegistry
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
-from plone.app.registry.registry import Registry
-
-from .proxy import LineageRegistry
-from .proxy import REGISTRY_NAME
-
-from .utils import enableRegistry
-from .utils import disableRegistry
+class ITestSchema(Interface):
+    """Test schema to test the registry.forInterface call.
+    """
+    test_attribute = schema.TextLine(default=u"test value")
 
 
 class TestLineageRegistry(unittest.TestCase):

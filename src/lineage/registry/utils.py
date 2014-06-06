@@ -1,14 +1,13 @@
-from zope.component import getSiteManager
-from plone.registry.interfaces import IRegistry
-
-from .proxy import REGISTRY_NAME
 from .proxy import LineageRegistry
+from .proxy import REGISTRY_NAME
+from plone.registry.interfaces import IRegistry
+from zope.component import getSiteManager
 
 
 def enableRegistry(child):
     sm = getSiteManager(context=child)
     if REGISTRY_NAME not in child.objectIds():
-        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME).__of__(child)
+        child[REGISTRY_NAME] = LineageRegistry(REGISTRY_NAME, parent=child)
     sm.registerUtility(component=child[REGISTRY_NAME], provided=IRegistry)
 
 
