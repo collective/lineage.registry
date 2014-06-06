@@ -1,9 +1,7 @@
-from zope.configuration import xmlconfig
-from plone.app.testing import (
-    PloneSandboxLayer,
-    IntegrationTesting,
-)
 from collective.lineage.testing import LINEAGE_FIXTURE
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneSandboxLayer
+from zope.configuration import xmlconfig
 
 
 class LineageRegistry(PloneSandboxLayer):
@@ -19,6 +17,7 @@ class LineageRegistry(PloneSandboxLayer):
         self['portal'] = portal
 
 LINEAGEREGISTRY_FIXTURE = LineageRegistry()
-LINEAGEREGISTRY_INTEGRATION_TESTING = \
-    IntegrationTesting(bases=(LINEAGEREGISTRY_FIXTURE, ),
-                       name="lineage.registry:Integration")
+LINEAGEREGISTRY_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(LINEAGEREGISTRY_FIXTURE, ),
+    name="lineage.registry:Integration"
+)
