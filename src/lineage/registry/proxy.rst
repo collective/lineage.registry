@@ -142,7 +142,7 @@ Remove, contains, keys::
     >>> sub_registry.records['lineage.registry.tests.cms'].value
     u'Plone + Lineage'
 
-XXX Todo: minKey, maxKey, _getField
+XXX TODO: Test _getField
 
 Access via registry
 -------------------
@@ -345,23 +345,17 @@ Keys::
     True
 
 
+TODO: more comprehensive tests of minKey and maxKey
 minKey::
 
     >>> portal_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
     'lineage.registry.tests.ITestSchema.test_attribute'
 
-TODO: fixme
-WTF?::
-
     >>> sub_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
-    Traceback (most recent call last):
-    ...
-    ValueError: empty tree
+    'lineage.registry.tests.ITestSchema.test_attribute'
 
     >>> subsub_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
-    Traceback (most recent call last):
-    ...
-    ValueError: empty tree
+    'lineage.registry.tests.ITestSchema.test_attribute'
 
 
 maxKey::
@@ -369,18 +363,11 @@ maxKey::
     >>> portal_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
     'lineage.registry.tests.ITestSchema.test_attribute'
 
-TODO: fixme
-WTF?::
-
     >>> sub_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
-    Traceback (most recent call last):
-    ...
-    ValueError: empty tree
+    'lineage.registry.tests.ITestSchema.test_attribute'
 
     >>> subsub_registry.records.maxKey(key='lineage.registry.tests.ITestSchema.test_attribute')
-    Traceback (most recent call last):
-    ...
-    ValueError: empty tree
+    'lineage.registry.tests.ITestSchema.test_attribute'
 
 
 Setting over registry boundaries
@@ -449,6 +436,19 @@ Now for sure::
 
     >>> subsub_registry.records._values.get('testkey', False)
     u'Testval3'
+
+
+
+Finally, testing _getField with records set above::
+
+    >>> portal_registry.records._getField(name='testkey')
+    <plone.registry.field.TextLine object at ...>
+
+    >>> sub_registry.records._getField(name='testkey')
+    <plone.registry.field.TextLine object at ...>
+
+    >>> subsub_registry.records._getField(name='testkey')
+    <plone.registry.field.TextLine object at ...>
 
 
 Done.

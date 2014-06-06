@@ -140,12 +140,24 @@ class _LineageRecords(_Records, Persistent):
         return list(data)
 
     def maxKey(self, key=None):
-        return max([self._values.maxKey(key) +
-                    self._parent_records.maxKey(key)])
+        keys = []
+        keys.append(self._parent_records.maxKey(key))
+        try:
+            own = self._values.maxKey(key)
+            keys.append(own)
+        except ValueError:
+            pass
+        return max(keys)
 
     def minKey(self, key=None):
-        return min([self._values.minKey(key) +
-                    self._parent_records.minKey(key)])
+        keys = []
+        keys.append(self._parent_records.minKey(key))
+        try:
+            own = self._values.minKey(key)
+            keys.append(own)
+        except ValueError:
+            pass
+        return min(keys)
 
     def _getField(self, name):
         field = self._fields.get(name, _MARKER)
