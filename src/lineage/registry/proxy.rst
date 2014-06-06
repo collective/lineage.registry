@@ -142,7 +142,6 @@ Remove, contains, keys::
     >>> sub_registry.records['lineage.registry.tests.cms'].value
     u'Plone + Lineage'
 
-XXX TODO: Test _getField
 
 Access via registry
 -------------------
@@ -345,7 +344,6 @@ Keys::
     True
 
 
-TODO: more comprehensive tests of minKey and maxKey
 minKey::
 
     >>> portal_registry.records.minKey(key='lineage.registry.tests.ITestSchema.test_attribute')
