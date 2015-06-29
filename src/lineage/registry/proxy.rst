@@ -305,14 +305,14 @@ Containment::
 
 Has Key::
 
-    >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
-    >>> sub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> sub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
-    >>> subsub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> subsub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
 
 Iter::
