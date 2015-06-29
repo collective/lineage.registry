@@ -14,15 +14,9 @@ Create ```child``` and ```childchild``` folder for tests::
 
 Make it a subsite::
 
-    >>> from p4a.subtyper.engine import Subtyper
-    >>> from p4a.subtyper.interfaces import ISubtyper
-    >>> from zope.component import getUtility
-    >>> from zope.component import provideUtility
     >>> from zope.component.interfaces import ISite
-    >>> provideUtility(Subtyper())
-    >>> subtyper = getUtility(ISubtyper)
-
-    >>> subtyper.change_type(child, u'collective.lineage.childsite')
+    >>> from collective.lineage.utils import enable_childsite
+    >>> enable_childsite(child)
     >>> ISite.providedBy(child)
     True
 
@@ -48,6 +42,7 @@ What actually happens is::
 
 An now we can go on as if we are after publishers traversal::
 
+    >>> from zope.component import getUtility
     >>> from plone.registry.interfaces import IRegistry
     >>> sub_registry = getUtility(IRegistry)
     >>> sub_registry
@@ -169,7 +164,7 @@ Setup childchild site::
     >>> childchildid = portal['child'].invokeFactory("Folder", "childchild")
     >>> childchild = portal['child']['childchild']
 
-    >>> subtyper.change_type(childchild, u'collective.lineage.childsite')
+    >>> enable_childsite(childchild)
     >>> ISite.providedBy(childchild)
     True
 
