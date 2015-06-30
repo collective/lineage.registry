@@ -6,7 +6,10 @@ History
 ----------------
 
 - Fix Database Conflict Errors, due to missing ``__parent__`` parameter on the
-  LineageRegistry object, which led to writing it on each request.
+  LineageRegistry object, which led to writing it on each request. An upgrade
+  step is provided. Please note, the upgrade step is bound to the
+  ``collective.lineage`` profile, as we don't have a profile in here.
+  [thet]
 
 
 1.2 (2014-06-06)
