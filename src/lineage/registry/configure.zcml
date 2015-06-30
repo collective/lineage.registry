@@ -1,8 +1,20 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup">
 
   <include package="collective.lineage" />
 
   <subscriber handler=".subscribers.enableChildRegistry" />
   <subscriber handler=".subscribers.disableChildRegistry" />
+
+  <!-- GS Upgrade Steps -->
+  <gs:upgradeStep
+      source="*"
+      destination="*"
+      title="Migrate from Persistent"
+      description="Set parent on registry and records, migrate records from persistent."
+      profile="collective.lineage:default"
+      handler=".upgrades.upgrade_from_persistent"
+      />
 
 </configure>

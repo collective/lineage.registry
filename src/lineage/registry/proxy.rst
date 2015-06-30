@@ -14,15 +14,9 @@ Create ```child``` and ```childchild``` folder for tests::
 
 Make it a subsite::
 
-    >>> from p4a.subtyper.engine import Subtyper
-    >>> from p4a.subtyper.interfaces import ISubtyper
-    >>> from zope.component import getUtility
-    >>> from zope.component import provideUtility
     >>> from zope.component.interfaces import ISite
-    >>> provideUtility(Subtyper())
-    >>> subtyper = getUtility(ISubtyper)
-
-    >>> subtyper.change_type(child, u'collective.lineage.childsite')
+    >>> from collective.lineage.utils import enable_childsite
+    >>> enable_childsite(child)
     >>> ISite.providedBy(child)
     True
 
@@ -48,6 +42,7 @@ What actually happens is::
 
 An now we can go on as if we are after publishers traversal::
 
+    >>> from zope.component import getUtility
     >>> from plone.registry.interfaces import IRegistry
     >>> sub_registry = getUtility(IRegistry)
     >>> sub_registry
@@ -83,7 +78,7 @@ Prepare data::
 Read from portal registry values from child registry::
 
     >>> sub_registry.records
-    <lineage.registry.proxy._LineageRecords object at 0x...>
+    <lineage.registry.proxy.LineageRecords object at 0x...>
 
     >>> sub_registry.records['lineage.registry.tests.cms'].value
     u'Plone'
@@ -169,7 +164,7 @@ Setup childchild site::
     >>> childchildid = portal['child'].invokeFactory("Folder", "childchild")
     >>> childchild = portal['child']['childchild']
 
-    >>> subtyper.change_type(childchild, u'collective.lineage.childsite')
+    >>> enable_childsite(childchild)
     >>> ISite.providedBy(childchild)
     True
 
@@ -188,7 +183,7 @@ Setup childchild site::
 Read child registry values from childchild registry::
 
     >>> subsub_registry.records
-    <lineage.registry.proxy._LineageRecords object at 0x...>
+    <lineage.registry.proxy.LineageRecords object at 0x...>
 
     >>> subsub_registry.records['lineage.registry.tests.cms'].value
     u'Plone + Lineage'
@@ -293,8 +288,8 @@ And the sub sub registry::
     u'test value'
 
 
-Test more of the _LineageRecords API
-------------------------------------
+Test more of the LineageRecords API
+-----------------------------------
 
 Containment::
 
@@ -310,14 +305,14 @@ Containment::
 
 Has Key::
 
-    >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> portal_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
-    >>> sub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> sub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
-    >>> subsub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
-    True
+#    >>> subsub_registry.records.has_key('lineage.registry.tests.ITestSchema.test_attribute')
+#    True
 
 
 Iter::
