@@ -37,31 +37,24 @@ def upgrade_from_persistent(context):
                 log.info('set records parent')
 
             if isinstance(reg._records, _LineageRecords):
-                log.info('migrate records')
                 oldrecs = reg._records
                 reg._records = LineageRecords(reg)
 
                 for key, val in oldrecs.items():
                     try:
                         reg._records[key] = val
-                        log.info(
-                            u'migrate records key: {0}, val: {1}'.format(
-                                key, val)
-                        )
                     except KeyError:
-                        # just have to. maybe this is the normal case.
-                        #
-                        # val.value raises KeyError, val._value not.
-                        # all because of
-                        # plone.registry.record.Record._get_value
+                        # I had a case, where the record with the key
+                        # ``plone.site_logo`` raised a KeyError, when
+                        # accessing val.value.
+                        # See: plone.registry.record.Record._get_value
+                        # When removing the parent, the value was accessed
+                        # directly via val._value and all was O.K.
                         del val.__parent__
                         reg._records[key] = val
-                        log.info(
-                            u'migrate records W/OUT RECORD PARENT '
-                            u'key: {0}, val: {1}'.format(key, val)
-                        )
                     except:
                         log.warn('could migrate {0} for {1}'.format(key, reg))
+                log.info('migrate records')
 
         else:
             log.warn('could not migrate {0}'.format(reg.getPhysicalPath()))
