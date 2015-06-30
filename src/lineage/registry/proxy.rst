@@ -78,7 +78,7 @@ Prepare data::
 Read from portal registry values from child registry::
 
     >>> sub_registry.records
-    <lineage.registry.proxy._LineageRecords object at 0x...>
+    <lineage.registry.proxy.LineageRecords object at 0x...>
 
     >>> sub_registry.records['lineage.registry.tests.cms'].value
     u'Plone'
@@ -183,7 +183,7 @@ Setup childchild site::
 Read child registry values from childchild registry::
 
     >>> subsub_registry.records
-    <lineage.registry.proxy._LineageRecords object at 0x...>
+    <lineage.registry.proxy.LineageRecords object at 0x...>
 
     >>> subsub_registry.records['lineage.registry.tests.cms'].value
     u'Plone + Lineage'
@@ -288,8 +288,8 @@ And the sub sub registry::
     u'test value'
 
 
-Test more of the _LineageRecords API
-------------------------------------
+Test more of the LineageRecords API
+-----------------------------------
 
 Containment::
 
