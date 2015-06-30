@@ -23,16 +23,18 @@ def upgrade_from_persistent(context):
         obj = result.getObject()
         reg = getattr(obj, REGISTRY_NAME, None)
         if reg:
-            log.info('migration for {0}'.format(reg.getPhysicalPath()))
+            log.info(
+                'migration for {0}'.format('/'.join(reg.getPhysicalPath()))
+            )
             reg = aq_base(reg)
             if not getattr(reg, '__parent__', False):
-                log.info('set registry parent')
                 # set the parent persitently
                 reg.__parent__ = obj
+                log.info('set registry parent')
 
             if not getattr(reg._records, '__parent__', False):
-                log.info('set records parent')
                 reg._records.__parent__ = reg
+                log.info('set records parent')
 
             if isinstance(reg._records, _LineageRecords):
                 log.info('migrate records')
@@ -42,6 +44,10 @@ def upgrade_from_persistent(context):
                 for key, val in oldrecs.items():
                     try:
                         reg._records[key] = val
+                        log.info(
+                            u'migrate records key: {0}, val: {1}'.format(
+                                key, val)
+                        )
                     except KeyError:
                         # just have to. maybe this is the normal case.
                         #
@@ -50,6 +56,10 @@ def upgrade_from_persistent(context):
                         # plone.registry.record.Record._get_value
                         del val.__parent__
                         reg._records[key] = val
+                        log.info(
+                            u'migrate records W/OUT RECORD PARENT '
+                            u'key: {0}, val: {1}'.format(key, val)
+                        )
                     except:
                         log.warn('could migrate {0} for {1}'.format(key, reg))
 
