@@ -6,9 +6,9 @@ from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from plone.registry.registry import _Records
 from zope.component import getSiteManager
+import warnings
 
 _MARKER = object()
-
 REGISTRY_NAME = 'lineage_registry'
 
 
@@ -36,32 +36,32 @@ class LineageRegistry(Registry):
     def __init__(self, id, title=None, parent=None):
         if parent:
             # We have to acquisition-wrap the registry before the
-            # _LineageRecords object is set, so that it's __parent__ attribute
+            # LineageRecords object is set, so that it's __parent__ attribute
             # is also set to the acquisition-wrapped registry.
-            self = self.__of__(parent)
+            self.__parent__ = parent
         else:
             raise AssertionError(
                 "parent must not be None, otherwise the Acquisition context "
                 "of LineageRegistry cannot be set")
 
-        super(LineageRegistry, self).__init__(id, title)
+        self.id = id
+        self.title = title
+
         # pass the acquisition-wrapped LineageRegistry instance to
-        # _LineageRecords
-        self._records = _LineageRecords(self)
+        # LineageRecords
+        self._records = LineageRecords(self)
 
     def __getitem__(self, name):
-        records = self._get_and_fix_records()
-        return records[name].value
+        return self.records[name].value
 
     def get(self, name, default=None):
-        records = self._get_and_fix_records()
-        record = records.get(name, _MARKER)
+        record = self.records.get(name, _MARKER)
         if record is _MARKER:
             return default
         return record.value
 
     def __setitem__(self, name, value):
-        records = self._get_and_fix_records()
+        records = self.records
         if name in records._values:
             records[name].value = value
             return
@@ -69,24 +69,14 @@ class LineageRegistry(Registry):
         records[name] = record
 
     def __contains__(self, name):
-        records = self._get_and_fix_records()
-        return name in records
-
-    def _get_and_fix_records(self):
-        recs = self._records
-        if not hasattr(recs.__parent__, '__parent__'):
-            if not hasattr(self, '__parent__'):
-                raise AttributeError(
-                    "We lost the Acquisition context. This shouldn't happen.")
-            recs.__parent__ = self
-        return recs
+        return name in self.records
 
     @property
     def records(self):
-        return self._get_and_fix_records()
+        return self._records
 
 
-class _LineageRecords(_Records, Persistent):
+class LineageRecords(_Records):
     """The records stored in the registry. This implements dict-like access
     to records, where as the Registry object implements dict-like read-only
     access to values.
@@ -95,29 +85,24 @@ class _LineageRecords(_Records, Persistent):
     @property
     def _parent_records(self):
         registry = get_parent_registry(self.__parent__)
-        if hasattr(registry, '_get_and_fix_records'):
-            # LineageRegistry
-            records = registry._get_and_fix_records()
-        else:
-            # Normal Registry
-            records = registry.records
+        records = registry.records
         return records
 
     def __setitem__(self, name, record):
         parent_rec = self._parent_records.get(name, _MARKER)
         if parent_rec is not _MARKER and parent_rec.value == record.value:
             return
-        super(_LineageRecords, self).__setitem__(name, record)
+        super(LineageRecords, self).__setitem__(name, record)
 
     def __delitem__(self, name):
         if name not in self._values:
             return
-        super(_LineageRecords, self).__delitem__(name)
+        super(LineageRecords, self).__delitem__(name)
 
     def __getitem__(self, name):
         if name not in self._values:
             return self._parent_records.__getitem__(name)
-        return super(_LineageRecords, self).__getitem__(name)
+        return super(LineageRecords, self).__getitem__(name)
 
     def __iter__(self):
         for name in self._values.__iter__():
@@ -170,3 +155,15 @@ class _LineageRecords(_Records, Persistent):
                 field = self._fields[recordName]
             field = FieldRef(recordName, field)
         return field
+
+
+class _LineageRecords(LineageRecords, Persistent):
+    """BBB: This used to be the class for the _records attribute of the
+    registry. Having this be a Persistent object was always a bad idea. We
+    keep it here so that we can migrate to the new structure, but it should
+    no longer be used.
+    """
+
+    def __init__(self, parent):
+        warnings.warn("The Records persistent class is deprecated and should not be used.", DeprecationWarning)  # noqa
+        super(_LineageRecords, self).__init__(parent)

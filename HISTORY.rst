@@ -5,7 +5,8 @@ History
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix Database Conflict Errors, due to missing ``__parent__`` parameter on the
+  LineageRegistry object, which led to writing it on each request.
 
 
 1.2 (2014-06-06)
