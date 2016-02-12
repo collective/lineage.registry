@@ -7,13 +7,19 @@
   <subscriber handler=".subscribers.enableChildRegistry" />
   <subscriber handler=".subscribers.disableChildRegistry" />
 
-  <!-- GS Upgrade Steps -->
+  <gs:registerProfile
+      name="default"
+      title="Lineage: Child Site Local Registry"
+      directory="profiles/default"
+      description="Add a local plone.registry based registry to newly created child sites."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <gs:upgradeStep
       source="*"
-      destination="*"
+      destination="1"
       title="Migrate from Persistent"
       description="Set parent on registry and records, migrate records from persistent."
-      profile="collective.lineage:default"
+      profile="lineage.registry:default"
       handler=".upgrades.upgrade_from_persistent"
       />
 

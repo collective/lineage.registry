@@ -5,7 +5,8 @@ History
 1.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add profile to properly register the upgrade step.
+  [thet]
 
 
 1.3 (2015-07-15)
