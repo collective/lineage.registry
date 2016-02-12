@@ -31,9 +31,10 @@ Check registry creation
     >>> csm
     <PersistentComponents child>
 
-XXX: Here test is cheating: We need to check if ```getUtility(IRegistry)```
-returns the childs sitemanager registry. Well, this needs publishers traversal
-as far as i know. No idea how to do this in a test. To be done.
+XXX: Here test is cheating: We need to check if ```getUtility(IRegistry)``` returns the childs sitemanager registry.
+Well, this needs publishers traversal as far as i know.
+No idea how to do this in a test.
+To be done.
 
 What actually happens is::
 
@@ -387,8 +388,7 @@ These settings should be available for all registries in the chain::
     u'Testval1'
 
 
-... but actually only be set on portal_registry, since we have set all the same
-values::
+... but actually only be set on portal_registry, since we have set all the same values::
 
     >>> portal_registry.records._values.get('testkey', False)
     u'Testval1'

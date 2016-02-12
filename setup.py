@@ -1,17 +1,22 @@
-from setuptools import setup, find_packages
-import os
+# -*- coding: utf-8 -*-
+from setuptools import find_packages
+from setuptools import setup
+
 
 version = '1.4.dev0'
-shortdesc = u"Lineage AddOn: plone.app.registry for subsites"
-longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-longdesc += open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')).read()
-longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
+short_description = u"Lineage Add-On: Child Site Local Registry"
+long_description = u'\n\n'.join([
+    open('README.rst').read(),
+    open('CHANGES.rst').read(),
+    open('LICENSE.rst').read(),
+])
+
 
 setup(
     name='lineage.registry',
     version=version,
-    description=shortdesc,
-    long_description=longdesc,
+    description=short_description,
+    long_description=long_description,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
