@@ -2,7 +2,7 @@
 History
 =======
 
-1.3.1 (unreleased)
+1.3.1 (2016-02-25)
 ------------------
 
 - Add profile to properly register the upgrade step.
