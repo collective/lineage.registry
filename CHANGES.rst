@@ -2,8 +2,8 @@
 History
 =======
 
-1.4 (unreleased)
-----------------
+1.3.1 (unreleased)
+------------------
 
 - Add profile to properly register the upgrade step.
   [thet]
