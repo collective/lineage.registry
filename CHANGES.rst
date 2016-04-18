@@ -2,10 +2,12 @@
 History
 =======
 
-1.4 (unreleased)
-----------------
+1.3.2 (unreleased)
+------------------
 
-- Nothing changed yet.
+- Fix: Return keys sorted, because ``RecordsProxyCollection`` expects them ordered.
+  One effect fixed is that resoruce bundles in subsites are not delivered 11 to 10 times.
+  [jensens]
 
 
 1.3.1 (2016-02-25)

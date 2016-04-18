@@ -122,7 +122,7 @@ class LineageRecords(_Records):
     def keys(self, min=None, max=None):
         data = set(self._values.keys(min, max))
         data.update(self._parent_records.keys(min, max))
-        return list(data)
+        return list(sorted(data))
 
     def maxKey(self, key=None):
         keys = []
