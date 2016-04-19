@@ -2,7 +2,7 @@
 History
 =======
 
-1.3.2 (unreleased)
+1.3.2 (2016-04-19)
 ------------------
 
 - Fix: Return keys sorted, because ``RecordsProxyCollection`` expects them ordered.
