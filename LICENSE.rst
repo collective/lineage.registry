@@ -1,10 +1,10 @@
- 
+
 License
 =======
 
-Copyright (c) 2012, BlueDynamics Alliance, Austria, Switzerland, Germany
+Copyright (c) 2012-2016, BlueDynamics Alliance, Austria, Switzerland, Germany
 
-GNU GENERAL PUBLIC LICENSE 
+GNU GENERAL PUBLIC LICENSE
 
 TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
@@ -74,7 +74,7 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
    your rights to work written entirely by you; rather, the intent is to
    exercise the right to control the distribution of derivative or
    collective works based on the Program.
-  
+
    In addition, mere aggregation of another work not based on the Program
    with the Program (or with a work based on the Program) on a volume of
    a storage or distribution medium does not bring the other work under
@@ -83,17 +83,17 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 3. You may copy and distribute the Program (or a work based on it,
    under Section 2) in object code or executable form under the terms of
    Sections 1 and 2 above provided that you also do one of the following:
-   
+
    a) Accompany it with the complete corresponding machine-readable
    source code, which must be distributed under the terms of Sections
-   1 and 2 above on a medium customarily used for software interchange; or, 
+   1 and 2 above on a medium customarily used for software interchange; or,
 
    b) Accompany it with a written offer, valid for at least three
    years, to give any third party, for a charge no more than your
    cost of physically performing source distribution, a complete
    machine-readable copy of the corresponding source code, to be
    distributed under the terms of Sections 1 and 2 above on a medium
-   customarily used for software interchange; or, 
+   customarily used for software interchange; or,
 
    c) Accompany it with the information you received as to the offer
    to distribute corresponding source code.  (This alternative is
@@ -110,13 +110,13 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
    anything that is normally distributed (in either source or binary
    form) with the major components (compiler, kernel, and so on) of the
    operating system on which the executable runs, unless that component
-   itself accompanies the executable. 
+   itself accompanies the executable.
 
    If distribution of executable or object code is made by offering
    access to copy from a designated place, then offering equivalent
    access to copy the source code from the same place counts as
    distribution of the source code, even though third parties are not
-   compelled to copy the source along with the object code. 
+   compelled to copy the source along with the object code.
 
 4. You may not copy, modify, sublicense, or distribute the Program
    except as expressly provided under this License.  Any attempt
@@ -160,7 +160,7 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
    any particular circumstance, the balance of the section is intended to
    apply and the section as a whole is intended to apply in other
    circumstances.
- 
+
    It is not the purpose of this section to induce you to infringe any
    patents or other property right claims or to contest validity of any
    such claims; this section has the sole purpose of protecting the
@@ -182,12 +182,12 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
    those countries, so that distribution is permitted only in or among
    countries not thus excluded.  In such case, this License incorporates
    the limitation as if written in the body of this License.
- 
+
 9. The Free Software Foundation may publish revised and/or new versions
    of the General Public License from time to time.  Such new versions will
    be similar in spirit to the present version, but may differ in detail to
    address new problems or concerns.
- 
+
    Each version is given a distinguishing version number.  If the Program
    specifies a version number of this License which applies to it and "any
    later version", you have the option of following the terms and conditions
