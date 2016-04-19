@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '1.3.3'
+version = '1.3.4.dev0'
 short_description = u"Lineage Add-On: Child Site Local Plone Registry"
 long_description = u'\n\n'.join([
     open('README.rst').read(),
