@@ -4,7 +4,7 @@ from setuptools import setup
 
 
 version = '1.3.2.dev0'
-short_description = u"Lineage Add-On: Child Site Local Registry"
+short_description = u"Lineage Add-On: Child Site Local Plone Registry"
 long_description = u'\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.rst').read(),
@@ -18,8 +18,11 @@ setup(
     description=short_description,
     long_description=long_description,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
+        'Framework :: Plone',
+        'Framework :: Plone :: 4.3',
+        'Framework :: Plone :: 5.0',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
