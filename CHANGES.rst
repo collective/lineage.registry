@@ -2,7 +2,7 @@
 History
 =======
 
-1.4.0 (unreleased)
+1.4.0 (2016-11-18)
 ------------------
 
 - Uninstall added. Attention: Uninstal deletes local registry!
