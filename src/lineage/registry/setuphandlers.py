@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.lineage.interface import IChildSite
+from collective.lineage.interfaces import IChildSite
 from lineage.registry.proxy import REGISTRY_NAME
 from lineage.registry.utils import disableRegistry
 from plone import api
