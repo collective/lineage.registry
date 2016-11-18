@@ -2,10 +2,11 @@
 History
 =======
 
-1.3.4 (unreleased)
+1.4.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Uninstall added. Attention: Uninstal deletes local registry!
+  [jensens]
 
 
 1.3.3 (2016-04-19)

@@ -1,26 +1,43 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:gs="http://namespaces.zope.org/genericsetup">
-
   <include package="collective.lineage" />
-
+  <!--
+    subscribers
+  -->
   <subscriber handler=".subscribers.enableChildRegistry" />
   <subscriber handler=".subscribers.disableChildRegistry" />
-
+  <!--
+    install/uninstall
+  -->
   <gs:registerProfile
-      name="default"
-      title="Lineage: Child Site Local Registry"
-      directory="profiles/default"
       description="Add a local plone.registry based registry to newly created child sites."
+      directory="profiles/default"
+      name="default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+      title="Lineage: Child Site Local Registry"
+  />
+  <gs:registerProfile
+      description="Uninstalls the lineage.registry add-on. Attention: This DELETES all child site specific settings."
+      directory="profiles/uninstall"
+      name="uninstall"
+      post_handler=".setuphandlers.uninstall"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      title="Lineage: Child Site Local Registry (uninstall)"
+  />
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="lineage.registry-hiddenprofiles"
+  />
+  <!--
+    upgrades
+  -->
   <gs:upgradeStep
-      source="*"
-      destination="1"
-      title="Migrate from Persistent"
       description="Set parent on registry and records, migrate records from persistent."
-      profile="lineage.registry:default"
+      destination="1"
       handler=".upgrades.upgrade_from_persistent"
-      />
-
+      profile="lineage.registry:default"
+      source="*"
+      title="Migrate from Persistent"
+  />
 </configure>
