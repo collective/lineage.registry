@@ -2,16 +2,17 @@
 History
 =======
 
-1.4.1 (unreleased)
-------------------
+1.5 (unreleased)
+----------------
 
-- Nothing changed yet.
+- update for Plone 5.2 and Python 3, add PyPI classifiers
+  [tkimnguyen]
 
 
 1.4.0 (2016-11-18)
 ------------------
 
-- Uninstall added. Attention: Uninstal deletes local registry!
+- Uninstall added. Attention: Uninstall deletes local registry!
   [jensens]
 
 

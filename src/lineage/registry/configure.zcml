@@ -5,8 +5,14 @@
   <!--
     subscribers
   -->
-  <subscriber handler=".subscribers.enableChildRegistry" />
-  <subscriber handler=".subscribers.disableChildRegistry" />
+  <subscriber
+    for="collective.lineage.events.ChildSiteCreatedEvent"
+    handler=".subscribers.enableChildRegistry"
+  />
+  <subscriber
+    for="collective.lineage.events.ChildSiteRemovedEvent"
+    handler=".subscribers.disableChildRegistry"
+  />
   <!--
     install/uninstall
   -->

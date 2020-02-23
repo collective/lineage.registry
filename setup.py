@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '1.4.1.dev0'
+version = '1.5.dev0'
 short_description = u"Lineage Add-On: Child Site Local Plone Registry"
 long_description = u'\n\n'.join([
     open('README.rst').read(),
@@ -23,12 +23,16 @@ setup(
         'Framework :: Plone',
         'Framework :: Plone :: 4.3',
         'Framework :: Plone :: 5.0',
+        'Framework :: Plone :: 5.1',
+        'Framework :: Plone :: 5.2',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    keywords='',
+    keywords='plone lineage subsite',
     author='BlueDynamics Alliance',
     author_email='dev@bluedynamics.com',
     url=u'https://github.com/collective/lineage.registry',
