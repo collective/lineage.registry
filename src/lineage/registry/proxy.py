@@ -5,6 +5,7 @@ from plone.registry import FieldRef
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from plone.registry.registry import _Records
+from six import PY3
 from zope.component import getSiteManager
 import warnings
 
@@ -148,9 +149,13 @@ class LineageRecords(_Records):
         field = self._fields.get(name, _MARKER)
         if field is _MARKER:
             return self.parents._getField(name)
-        if isinstance(field, basestring):
+        if PY3:
+            string_types = str
+        else:
+            string_types = basestring
+        if isinstance(field, string_types):
             recordName = field
-            while isinstance(field, basestring):
+            while isinstance(field, string_types):
                 recordName = field
                 field = self._fields[recordName]
             field = FieldRef(recordName, field)
