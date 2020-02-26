@@ -45,12 +45,10 @@ setup(
     install_requires=[
         'setuptools',
         'collective.lineage',
-        'plone.api',
     ],
     extras_require={
         'test': [
             'collective.lineage [test]',
-            'interlude',
         ],
     },
     entry_points="""
