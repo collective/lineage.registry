@@ -15,7 +15,8 @@ On value delete it deletes only existing values in the child-registry and does n
 Restrictions
 ============
 
-Theres no editing UI for now. 
+Theres no editing UI.
+Look for `lineage.controlpanels <https://pypi.org/project/lineage.controlpanels/>`_ to modify values in the registry.
 
 Installation
 ============
