@@ -2,7 +2,7 @@
 History
 =======
 
-1.5 (unreleased)
+1.5 (2020-02-26)
 ----------------
 
 - update for Plone 5.2 and Python 3, add PyPI classifiers
