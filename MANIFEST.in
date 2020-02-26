@@ -1,3 +1,7 @@
 include *.rst
+include *.py
+include *.txt
+include buildout.cfg
 recursive-include src *
 recursive-exclude src *.pyc 
+
